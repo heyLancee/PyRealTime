@@ -41,7 +41,6 @@ class RealTimeSimulation:
             # 计算需要等待的时间以保持采样周期
             elapsed_time = time.time() - loop_start_time
             sleep_time = max(0, self.sample_time - elapsed_time)
-            print(f"sleep_time: {sleep_time}")
             time.sleep(sleep_time)
 
     def start(self, callback: Callable[[float], bool]):
