@@ -9,7 +9,7 @@ setup(
     author="Xinyao Lun",
     author_email="xyaolun@163.com",
     description="一个用于实时仿真的Python模块",
-    url="https://github.com/heylancee/PyRealTime",
+    url="https://github.com/heyLancee/PyRealTime",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
