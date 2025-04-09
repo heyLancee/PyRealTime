@@ -16,6 +16,7 @@ class RealTimeSimulation:
         """
         self.sample_time = sample_time
         self.is_running = False
+        self.sim_finished = False
         self.current_time = 0.0
         self._simulation_thread = None
         self._stop_event = threading.Event()
@@ -32,13 +33,11 @@ class RealTimeSimulation:
             
             # 执行回调
             if callback(self.current_time):
-                self.stop()
+                self.sim_finished = True
                 break
 
             # 更新仿真时间
             self.current_time += self.sample_time
-            
-            # 计算需要等待的时间以保持采样周期
             elapsed_time = time.time() - loop_start_time
             sleep_time = max(0, self.sample_time - elapsed_time)
             time.sleep(sleep_time)
@@ -56,6 +55,7 @@ class RealTimeSimulation:
         self.reset()
             
         self.is_running = True
+        self.sim_finished = False
         self._stop_event.clear()
         self._simulation_thread = threading.Thread(
             target=self._simulation_loop,
